@@ -1,0 +1,156 @@
+<div class="relative">
+    <div fxLayout="row" fxLayoutAlign="center start" class="graphContainer">
+        <div fxLayout="column" fxFlex.xl="40" fxFlex.lg="32" fxFlex.md="50" fxFlex.sm="80" fxFlex.xs="90">
+            <mat-card class="cardBody mat-elevation-z8">
+                <!-- GRAPHS -->
+                <div class="chartContainer row justify-content-center">
+                    <!-- <ngx-charts-pie-chart
+                    style="padding-left: 30px;"
+                    [animations]=true
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="pieData"
+                    [gradient]="gradient"
+                    [doughnut]="true"
+                    [arcWidth]="0.444"
+                    (select)="onSelect($event)"
+                    (activate)="onActivate($event)"
+                    (deactivate)="onDeactivate($event)"
+                            >
+                    </ngx-charts-pie-chart> -->
+                    <ngx-charts-pie-grid
+                    [view]="view"
+                    [scheme]="colorScheme"
+                    [results]="single"
+                    (select)="onSelect($event)"
+                    >
+                    </ngx-charts-pie-grid>
+                </div>
+                <!-- <div class="d-flex flex-row justify-content-center p-2">
+                    <carousel [pauseOnFocus]="true" [interval]=none>
+                        <slide>
+                            
+                        </slide>
+
+                        <slide>
+                            <img src="https://images.unsplash.com/photo-1538513428543-e8b1880f8033?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="first slide" style="display: block; width: 100%;">
+                        </slide>
+                        <slide>
+                            <img  src="https://images.unsplash.com/photo-1515180711443-f8685c6d6a74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt="second slide" style="display: block; width: 100%;">
+                        </slide>
+                        <slide>
+                            <img  src="https://images.unsplash.com/photo-1595654378985-92061e59a24d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80" alt="third slide" style="display: block; width: 100%;">
+                        </slide>
+                        </carousel>
+                </div> -->
+            
+                <!-- BREAKDOWN -->
+                <div class="d-flex flex-column justify-content-center" style="padding-left: 10px; padding-right: 10px; padding-bottom: 20px;">
+                    <!-- <mat-accordion>
+
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                Your Achievements!
+                            </mat-expansion-panel-header>
+                            <mat-expansion-panel-description>
+                                This Month
+                            </mat-expansion-panel-description>
+                          
+                            
+                        </mat-expansion-panel>
+                      
+                        <mat-expansion-panel>
+                          <mat-expansion-panel-header>
+                            This is the expansion 2 title
+                          </mat-expansion-panel-header>
+                      
+                          This the expansion 2 content
+                      
+                        </mat-expansion-panel>
+                      
+                    </mat-accordion> -->
+
+                    <accordion [isAnimated]="true">
+                        <accordion-group heading="Achievements this month" [panelClass]="graphClass" [isOpen]=true>
+                            <div class="container">
+                                <div class="justify-content-center">
+                                <ngx-charts-gauge
+                                [view]="viewGauge"
+                                [scheme]="colorScheme"
+                                [results]="achieved"
+                                [legend]=true
+                                [legendPosition]=below
+                                (select)="onSelect($event)"
+                                (activate)="onActivate($event)"
+                                (deactivate)="onDeactivate($event)"
+                                >
+                                </ngx-charts-gauge>
+                            </div>
+                            </div>
+                        </accordion-group>
+
+                        <accordion-group heading="Projections">
+                            <mat-form-field class="chip-list">
+                                <mat-chip-list #chipList aria-label="Fruit selection">
+                                  <mat-chip
+                                    *ngFor="let fruit of fruits"
+                                    [selectable]="selectable"
+                                    [removable]="removable"
+                                    (removed)="remove(fruit)">
+                                    {{fruit}}
+                                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                                  </mat-chip>
+                                  <input
+                                    placeholder="New fruit..."
+                                    #fruitInput
+                                    [formControl]="fruitCtrl"
+                                    [matAutocomplete]="auto"
+                                    [matChipInputFor]="chipList"
+                                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                                    (matChipInputTokenEnd)="add($event)">
+                                </mat-chip-list>
+                                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                                  <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+                                    {{fruit}}
+                                  </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+                        </accordion-group>
+
+                        <accordion-group heading="Goal Tracker">
+                            <div class="row justify-content-center">
+                                <div class="col-7 form-group">
+                                    <div class="col-xs-12 col mb-2">
+                                      <div class="btn-group"
+                                           dropdown
+                                           (isOpenChange)="onOpenChange($event)">
+                                        <button id="button-state-change" dropdownToggle type="button" class="btn btn-outline-warning dropdown-toggle"
+                                                aria-controls="dropdown-state-change dropdown-animated">
+                                          Period <span class="caret"></span>
+                                        </button>
+                                        <ul id="dropdown-state-change" *dropdownMenu class="dropdown-menu"
+                                            role="menu" aria-labelledby="button-state-change button-animated">
+                                          <li role="menuitem"><a class="dropdown-item"><span class="badge badge-primary">Monthly</span></a></li>
+                                          <li role="menuitem"><a class="dropdown-item"><span class="badge badge-info">Quaterly</span></a></li>
+                                          <li role="menuitem"><a class="dropdown-item"><span class="badge badge-success">Yearly</span></a></li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                    <div class="col-xs-12 col mb-3" *ngIf="text">
+                                        <mat-form-field></mat-form-field>
+                                        <p class="card card-block card-header">Please set your {{text}} goal.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="mb-2">
+                                <progressbar class="progress-striped active"  [value]="136" type="info"><i>136 / 150</i></progressbar>
+                            </div>
+                        </accordion-group>
+                    </accordion>
+                </div>
+           </mat-card>
+        </div>
+    </div>
+</div>

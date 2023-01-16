@@ -1,0 +1,20 @@
+$md-night: #2e2c2f;
+$md-day: #f5f5f5;
+$md-border-n: 3px solid #4d4c4e;
+$md-border-d: 3px solid #ffffff;
+
+.creditBody {
+    position: relative;
+    border-radius: 32px;
+}
+
+.cardBody {
+    position: relative;
+    background-color: $md-day;
+    border: $md-border-d;
+    border-radius: 32px;
+}
+
+.graphContainer {
+    padding: 10vh 20vh 10vh 20vh;
+}

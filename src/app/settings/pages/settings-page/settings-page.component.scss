@@ -1,0 +1,14 @@
+@import '~src/_theme-colors';
+
+.container {
+  display: flex;
+}
+
+.active-route {
+  color: $primary;
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+}

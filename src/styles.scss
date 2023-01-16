@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+@import './theme-colors';
+@import './custom-palettes';
+@include mat-core();
+
+// $mat-night: #2E2C2F;
+// $mat-peach: #FCDBAB;
+// $mat-lava: #C81D25;
+// $mat-wintermelon: #689689;
+
+$light-theme: mat-light-theme($md-day, $md-peach, $md-salmon);
+@include angular-material-theme($light-theme);
+
+$dark-theme: mat-dark-theme($md-night, $md-peach, $md-salmon);
+@include angular-material-theme($dark-theme);
+
+html,
+body {
+  height: 100%;
+  width: auto;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
